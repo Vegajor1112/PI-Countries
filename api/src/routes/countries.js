@@ -1,9 +1,23 @@
 const { urlencoded } = require("body-parser");
 const axios = require("axios");
+const { Router } = require("express");
 const { Country } = require("../db");
+const { capitalize } = require("./auxfs");
 
-const countries = async (req, res) => {
+const countriesRouter = Router();
+
+countriesRouter.get("", async (req, res) => {
   let countriesData;
+  const { name } = req.query;
+
+  if (name) {
+    countriesData = await Country.findAll({
+      where: { nombre: capitalize(req.query.name) },
+    });
+    if (countriesData.length !== 0) res.send(countriesData[0]);
+    else res.send("Country not found");
+    return;
+  }
 
   console.log("Buscamos primero en la base de datos");
   try {
@@ -38,10 +52,7 @@ const countries = async (req, res) => {
   }
 
   res.send(countriesData);
-};
+});
 
-const countriesId = async (req, res) => {
-  res.send("Ruta de GET countries");
-};
-
-module.exports = { countries, countriesId };
+module.exports = countriesRouter;
+//module.exports = { countries, countriesId, queryCountry };
