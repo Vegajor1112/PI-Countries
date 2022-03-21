@@ -1,7 +1,10 @@
-const { Activity } = require("../db");
+const { Activity, Country } = require("../db");
+const { Router } = require("express");
 
-const activity = async (req, res) => {
-  const { id, nombre, dificultad, duracion, temporada } = req.body;
+const activityRouter = Router();
+
+activityRouter.post("", async (req, res) => {
+  const { id, nombre, dificultad, duracion, temporada, idCountries } = req.body;
   console.log("activity");
   const activity = await Activity.create({
     id,
@@ -10,7 +13,9 @@ const activity = async (req, res) => {
     duracion,
     temporada,
   });
-  res.send(activity);
-};
 
-module.exports = activity;
+  activity.addCountries(idCountries);
+  res.send(activity);
+});
+
+module.exports = activityRouter;

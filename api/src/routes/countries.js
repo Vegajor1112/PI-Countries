@@ -1,20 +1,21 @@
 const { urlencoded } = require("body-parser");
 const axios = require("axios");
 const { Router } = require("express");
-const { Country } = require("../db");
-const { capitalize } = require("./auxfs");
+const { Country, Activity } = require("../db");
+const { Op } = require("sequelize");
 
 const countriesRouter = Router();
-
+//capitalize(req.query.name)
 countriesRouter.get("", async (req, res) => {
   let countriesData;
   const { name } = req.query;
 
   if (name) {
     countriesData = await Country.findAll({
-      where: { nombre: capitalize(req.query.name) },
+      where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
     });
-    if (countriesData.length !== 0) res.send(countriesData[0]);
+
+    if (countriesData.length !== 0) res.send(countriesData);
     else res.send("Country not found");
     return;
   }
@@ -33,8 +34,7 @@ countriesRouter.get("", async (req, res) => {
 
     countriesData = countriesData.map((country) => {
       let capital;
-
-      if (!country.capital) capital = "No posee";
+      if (!country.capital) capital = "No capital";
       else capital = country.capital[0];
 
       return {
@@ -54,5 +54,12 @@ countriesRouter.get("", async (req, res) => {
   res.send(countriesData);
 });
 
+countriesRouter.get("/:countryId", async (req, res) => {
+  let countriesData = await Country.findAll({
+    where: { id: req.params.countryId.toUpperCase() },
+    include: Activity,
+  });
+  res.send(countriesData[0]);
+});
+
 module.exports = countriesRouter;
-//module.exports = { countries, countriesId, queryCountry };
