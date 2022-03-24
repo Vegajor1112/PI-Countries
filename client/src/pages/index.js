@@ -1,3 +1,4 @@
-import LandingPage from "./LandingPage";
+import Home from "./Home";
+import Country from "./Country";
 
-export { LandingPage };
+export { Home, Country };

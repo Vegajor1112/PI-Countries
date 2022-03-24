@@ -1,10 +1,12 @@
+import { Route } from "react-router";
 import "./App.css";
-import { LandingPage } from "./views";
+import { Home, Country } from "./pages";
 
 function App() {
   return (
     <>
-      <LandingPage />
+      <Route exact path="/home" component={Home} />
+      <Route path="/countries/:id" component={Country} />
     </>
   );
 }

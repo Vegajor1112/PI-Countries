@@ -1,3 +1,5 @@
 import NavBar from "./NavBar";
+import CountriesContainer from "./CountriesContainer";
+import CountryDetail from "./CountryDetail";
 
-export { NavBar };
+export { NavBar, CountriesContainer, CountryDetail };
