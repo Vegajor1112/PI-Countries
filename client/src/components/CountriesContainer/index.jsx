@@ -12,24 +12,24 @@ const CountriesContainer=()=>{
     const countries=useSelector((state)=>state.countries)
 
     useEffect( ()=>{dispatch( getCountries() );},[ dispatch ] );
-
+    console.log(countries)
     return(
         <div className={style.mainContainer}>
             <FilterBar></FilterBar>
-           {countries.length!==0?
-                typeof(countries)!=="string"?
-           countries.map(country=>{
-                const {id,nombre,bandera,continente}=country
-                return(                   
-                    <CountryItem 
-                        key={id}
-                        id={id}
-                        nombre={nombre}
-                        bandera={bandera}
-                        continente={continente} 
-                        />
-                )
-            }):<span>No countries found...</span>:
+           {countries.length!==0?                
+                !countries.hasOwnProperty("notFound")?
+                    countries.map(country=>{
+                            const {id,nombre,bandera,continente}=country
+                            return(                   
+                                <CountryItem 
+                                    key={id}
+                                    id={id}
+                                    nombre={nombre}
+                                    bandera={bandera}
+                                    continente={continente} 
+                                    />
+                            )
+                        }):<h2>No countries found...</h2>:
            "Loading..."}
         </div>
     )

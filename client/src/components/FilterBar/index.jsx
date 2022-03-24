@@ -26,11 +26,11 @@ const FilterBar=()=>{
     return(
         <div className={style.mainContainer}>
             <div className={style.orderContainer}>
-                <label htmlFor="orderByPopulation"></label>
+                <label htmlFor="orderByPopulation">Population:</label>
                 <input type="checkbox" id="orderByPopulation" checked={localOrder.orderByPopulation} onChange={handleChange} />
             </div>
             <div className={style.orderContainer}>
-                <label htmlFor="orderByName"></label>
+                <label htmlFor="orderByName">Name:</label>
                 <input type="checkbox" id="orderByName" checked={localOrder.orderByName} onChange={handleChange} />
             </div>
         </div>

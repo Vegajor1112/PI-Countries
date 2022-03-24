@@ -7,27 +7,28 @@ const SET_ORDER = "SET_ORDER";
 
 const getCountries = () => {
   return async function (dispatch) {
-    const data = await axios("http://localhost:3001/countries");
+    const data = await axios.get("http://localhost:3001/countries");
     dispatch({ type: GET_COUNTRIES, payload: data.data });
   };
 };
 
 const getCountry = (id) => {
   return async function (dispatch) {
-    const data = await axios(`http://localhost:3001/countries/${id}`);
+    const data = await axios.get(`http://localhost:3001/countries/${id}`);
     dispatch({ type: GET_COUNTRY, payload: data.data });
   };
 };
 
 const searchCountries = (search) => {
   return async function (dispatch) {
-    const data = await axios(`http://localhost:3001/countries?name=${search}`);
+    const data = await axios.get(
+      `http://localhost:3001/countries?name=${search}`
+    );
     dispatch({ type: SEARCH_COUNTRIES, payload: data.data });
   };
 };
 
 const setOrder = (order) => {
-  console.log("Queriendo poner este order: ", order);
   return { type: SET_ORDER, payload: order };
 };
 

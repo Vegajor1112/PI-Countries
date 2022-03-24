@@ -5,7 +5,7 @@ const { Country, Activity } = require("../db");
 const { Op } = require("sequelize");
 
 const countriesRouter = Router();
-//capitalize(req.query.name)
+
 countriesRouter.get("", async (req, res) => {
   let countriesData;
   const { name } = req.query;
@@ -16,11 +16,10 @@ countriesRouter.get("", async (req, res) => {
     });
 
     if (countriesData.length !== 0) res.send(countriesData);
-    else res.send("Country not found");
+    else res.send({ notFound: "Country not found" });
     return;
   }
 
-  console.log("Buscamos primero en la base de datos");
   try {
     countriesData = await Country.findAll({ raw: true });
   } catch (error) {
@@ -28,7 +27,6 @@ countriesRouter.get("", async (req, res) => {
   }
 
   if (countriesData.length === 0) {
-    console.log("Estoy buscando en la API porque la base de datos está vacía");
     countriesData = await axios("https://restcountries.com/v3.1/all");
     countriesData = countriesData.data;
 
