@@ -2,7 +2,7 @@ import axios from "axios";
 
 const GET_COUNTRIES = "GET_COUNTRIES";
 const GET_COUNTRY = "GET_COUNTRY";
-const SEARCH_COUNTRY = "SEARCH_COUNTRY";
+const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
 
 const getCountries = () => {
   return async function (dispatch) {
@@ -18,4 +18,18 @@ const getCountry = (id) => {
   };
 };
 
-export { GET_COUNTRY, GET_COUNTRIES, SEARCH_COUNTRY, getCountries, getCountry };
+const searchCountries = (search) => {
+  return async function (dispatch) {
+    const data = await axios(`http://localhost:3001/countries?name=${search}`);
+    dispatch({ type: SEARCH_COUNTRIES, payload: data.data });
+  };
+};
+
+export {
+  GET_COUNTRY,
+  GET_COUNTRIES,
+  SEARCH_COUNTRIES,
+  getCountries,
+  getCountry,
+  searchCountries,
+};

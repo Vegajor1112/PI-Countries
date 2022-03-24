@@ -1,13 +1,23 @@
 import style from './SearchBar.module.css';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import { useDispatch } from 'react-redux';
+import { getCountries,searchCountries } from '../../store/actions';
 
 
 const SearchBar=()=>{
     const [input,setInput] = useState("");
+    const dispatch=useDispatch();
+
 
     const handleChange=(e)=>{
-        setInput(e.target.value);
+        setInput(e.target.value);        
     }
+
+    useEffect(()=>{
+        input?
+        dispatch(searchCountries(input)):
+        dispatch(getCountries())
+    },[input])
 
     return(
         <div className={style.mainContainer}>
