@@ -11,26 +11,26 @@ const CountriesContainer=()=>{
 
     const countries=useSelector((state)=>state.countries)
 
-    useEffect(()=>{
-        dispatch(getCountries());
-    },[])
+    useEffect( ()=>{dispatch( getCountries() );},[ dispatch ] );
 
     return(
         <div className={style.mainContainer}>
             <FilterBar></FilterBar>
-           {countries.map(country=>{
-               const {id,nombre,bandera,continente}=country
-               return(
-                   
-                   <CountryItem 
-                    key={id}
-                    id={id}
-                    nombre={nombre}
-                    bandera={bandera}
-                    continente={continente} 
-                    />
-               )
-           })}
+           {countries.length!==0?
+                typeof(countries)!=="string"?
+           countries.map(country=>{
+                const {id,nombre,bandera,continente}=country
+                return(                   
+                    <CountryItem 
+                        key={id}
+                        id={id}
+                        nombre={nombre}
+                        bandera={bandera}
+                        continente={continente} 
+                        />
+                )
+            }):<span>No countries found...</span>:
+           "Loading..."}
         </div>
     )
 }
