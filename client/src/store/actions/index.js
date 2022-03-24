@@ -3,6 +3,7 @@ import axios from "axios";
 const GET_COUNTRIES = "GET_COUNTRIES";
 const GET_COUNTRY = "GET_COUNTRY";
 const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
+const SET_ORDER = "SET_ORDER";
 
 const getCountries = () => {
   return async function (dispatch) {
@@ -25,11 +26,18 @@ const searchCountries = (search) => {
   };
 };
 
+const setOrder = (order) => {
+  console.log("Queriendo poner este order: ", order);
+  return { type: SET_ORDER, payload: order };
+};
+
 export {
   GET_COUNTRY,
   GET_COUNTRIES,
   SEARCH_COUNTRIES,
+  SET_ORDER,
   getCountries,
   getCountry,
   searchCountries,
+  setOrder,
 };
