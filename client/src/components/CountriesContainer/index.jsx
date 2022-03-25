@@ -1,18 +1,15 @@
 import style from './CountriesContainer.module.css'
 import {useDispatch,useSelector} from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import { getCountries } from '../../store/actions';
 import CountryItem from '../CountryItem';
 import FilterBar from '../FilterBar';
 
-const CountriesContainer=()=>{
+const CountriesContainer=(props)=>{
 
     const dispatch=useDispatch();
+    const countries=useSelector((state)=>state.countries)     
 
-    const countries=useSelector((state)=>state.countries)
-
-    useEffect( ()=>{dispatch( getCountries() );},[ dispatch ] );
-    console.log(countries)
     return(
         <div className={style.mainContainer}>
             <FilterBar></FilterBar>

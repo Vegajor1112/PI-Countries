@@ -1,37 +1,45 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setOrder } from '../../store/actions';
 import style from './FilterBar.module.css'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setOrder } from '../../store/actions'
 
-const FilterBar=()=>{
 
-    const dispatch=useDispatch();
-    const order = useSelector((state)=>state.order);
-    const [localOrder,setLocalOrder]=useState(order);
-    console.log("render")
-
-    const handleChange=(e)=>{
-        const property=e.target.id;
-        const value=e.target.checked;
-        setLocalOrder({
-            ...localOrder,
-            [property]:value
-        })
-    }
+const FilterBar=(props)=>{      
+    const dispatch = useDispatch()    
+    const order=useSelector(state=>state.order)
+    const filter=useSelector(state=>state.filter)
     
-    useEffect(()=>{
-        dispatch(setOrder(localOrder))
-    },[dispatch,localOrder])
+    const handleOrderChange=(e)=>{
+        console.log("Cambiando el orden");
+        const property = e.target.name;
+        const value = e.target.value;
+        const newOrder={
+            ...order,
+            [property]:value
+        }
+        console.log(newOrder)
+        dispatch(setOrder(newOrder))
+
+    }
 
     return(
         <div className={style.mainContainer}>
-            <div className={style.orderContainer}>
-                <label htmlFor="orderByPopulation">Population:</label>
-                <input type="checkbox" id="orderByPopulation" checked={localOrder.orderByPopulation} onChange={handleChange} />
-            </div>
-            <div className={style.orderContainer}>
-                <label htmlFor="orderByName">Name:</label>
-                <input type="checkbox" id="orderByName" checked={localOrder.orderByName} onChange={handleChange} />
+            <div className={style.filterContainer}>
+                <span>Order by:</span>
+                <div className={style.radioContainer}>
+                    <label htmlFor="name">Name:</label>
+                    <input type="radio" name="orderBy" id="name" checked={order.orderBy==="name"} value="name" onChange={handleOrderChange} />
+                    <label htmlFor="population">Population</label>
+                    <input type="radio" name="orderBy" id="population" checked={order.orderBy==="population"} onChange={handleOrderChange} value="population" />
+                </div>
+
+                <span>Order type:</span>
+                <div className={style.radioContainer}>
+                    <label htmlFor="ascend">Ascend</label>
+                    <input type="radio" name="orderType" id="ascend" checked={order.orderType==="ascend"} value="ascend" onChange={handleOrderChange} />
+                    <label htmlFor="descend">Descend</label>
+                    <input type="radio" name="orderType" id="descend" checked={order.orderType==="descend"} value="descend" onChange={handleOrderChange} />
+                </div>
             </div>
         </div>
     )   

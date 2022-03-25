@@ -9,16 +9,17 @@ const SearchBar=()=>{
     const dispatch=useDispatch();
 
     const handleChange=(e)=>{
-        setInput(e.target.value);        
+        setInput(e.target.value);
     }
 
-    const order=useSelector((state)=>state.order)
+    const order=useSelector(state=>state.order);
+    const filter=useSelector(state=>state.filter);
     
     useEffect(()=>{
         input?
-        dispatch(searchCountries(input,order)):
-        dispatch(getCountries(order))
-    },[input,dispatch,order])
+        dispatch(searchCountries(input,order,filter)):
+        dispatch(getCountries(order,filter))
+    },[input,dispatch,order,filter])
 
     return(
         <div className={style.mainContainer}>

@@ -9,8 +9,12 @@ const initialState = {
   countries: [],
   country: {},
   order: {
-    orderByPopulation: false,
-    orderByName: false,
+    orderBy: "name",
+    orderType: "ascend",
+  },
+  filter: {
+    filterByContinent: "",
+    filterByActivity: "",
   },
 };
 
@@ -36,6 +40,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         order: action.payload,
       };
+
     default:
       return state;
   }
