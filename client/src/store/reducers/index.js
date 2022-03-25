@@ -3,6 +3,7 @@ import {
   GET_COUNTRY,
   SEARCH_COUNTRIES,
   SET_ORDER,
+  SET_SEARCH_INPUT,
 } from "../actions";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
     filterByContinent: "",
     filterByActivity: "",
   },
+  searchInput: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         order: action.payload,
+      };
+    case SET_SEARCH_INPUT:
+      return {
+        ...state,
+        searchInput: action.payload,
       };
 
     default:

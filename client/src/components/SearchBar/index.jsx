@@ -1,29 +1,29 @@
 import style from './SearchBar.module.css';
-import {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getCountries,searchCountries } from '../../store/actions';
+import {useEffect} from 'react'
+import { useDispatch } from 'react-redux';
+import { getCountries,searchCountries} from '../../store/actions';
+import useSearchInput from '../../hooks/useSearchInput';
 
-const SearchBar=()=>{
-    const [input,setInput] = useState("");
+const SearchBar=()=>{    
 
-    const dispatch=useDispatch();
+    const dispatch=useDispatch()
+    const [searchInput,setSearchInput]=useSearchInput();
+    
 
     const handleChange=(e)=>{
-        setInput(e.target.value);
-    }
-
-    const order=useSelector(state=>state.order);
-    const filter=useSelector(state=>state.filter);
-    
+        const newInput=e.target.value
+        dispatch(setSearchInput(newInput));
+    }   
+        
     useEffect(()=>{
-        input?
-        dispatch(searchCountries(input,order,filter)):
-        dispatch(getCountries(order,filter))
-    },[input,dispatch,order,filter])
+        searchInput?
+        dispatch(searchCountries(searchInput)):
+        dispatch(getCountries())
+    },[searchInput,dispatch])
 
     return(
         <div className={style.mainContainer}>
-            <input type="text" className={style.searchInput} value={input} onChange={handleChange} />
+            <input type="text" className={style.searchInput} value={searchInput} onChange={handleChange} />
             <button className={style.searchButton} >Search</button>
         </div>
     )
