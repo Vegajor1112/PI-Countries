@@ -8,7 +8,9 @@ const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
 
 const getCountries = (order, filter) => {
   return async function (dispatch) {
-    const data = await axios.get("http://localhost:3001/countries");
+    const data = await axios.get("http://localhost:3001/countries", {
+      params: { order, filter },
+    });
     dispatch({
       type: GET_COUNTRIES,
       payload: { data: data.data, order: order, filter: filter },
@@ -19,7 +21,8 @@ const getCountries = (order, filter) => {
 const searchCountries = (search, order, filter) => {
   return async function (dispatch) {
     const data = await axios.get(
-      `http://localhost:3001/countries?name=${search}`
+      `http://localhost:3001/countries?name=${search}`,
+      { params: { order, filter } }
     );
     dispatch({
       type: SEARCH_COUNTRIES,

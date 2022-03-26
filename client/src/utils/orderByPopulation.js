@@ -1,5 +1,5 @@
 const orderByPopulation = (countries, type) => {
-  if ((countries.length = 1)) return countries;
+  if (countries.hasOwnProperty("notFound")) return countries;
   return countries.sort((pais1, pais2) => {
     if (type === "ascend") {
       console.log("Ascendente");

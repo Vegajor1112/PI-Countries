@@ -6,7 +6,7 @@ import { useFilter, useOrder } from '../../hooks'
 
 
 const FilterBar=(props)=>{      
-    const dispatch = useDispatch()    
+       
     const [order,setOrder]=useOrder();
     const [filter]=useFilter()
     
