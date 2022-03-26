@@ -2,24 +2,18 @@ import style from './FilterBar.module.css'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrder } from '../../store/actions'
+import { useFilter, useOrder } from '../../hooks'
 
 
 const FilterBar=(props)=>{      
     const dispatch = useDispatch()    
-    const order=useSelector(state=>state.order)
-    const filter=useSelector(state=>state.filter)
+    const [order,setOrder]=useOrder();
+    const [filter]=useFilter()
     
     const handleOrderChange=(e)=>{
-        console.log("Cambiando el orden");
-        const property = e.target.name;
-        const value = e.target.value;
-        const newOrder={
-            ...order,
-            [property]:value
-        }
-        console.log(newOrder)
-        dispatch(setOrder(newOrder))
-
+        const property=e.target.name;
+        const value=e.target.value;
+        setOrder(property,value)
     }
 
     return(

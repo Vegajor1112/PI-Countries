@@ -9,14 +9,10 @@ const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
 const getCountries = (order, filter) => {
   return async function (dispatch) {
     const data = await axios.get("http://localhost:3001/countries");
-    dispatch({ type: GET_COUNTRIES, payload: data.data });
-  };
-};
-
-const getCountry = (id) => {
-  return async function (dispatch) {
-    const data = await axios.get(`http://localhost:3001/countries/${id}`);
-    dispatch({ type: GET_COUNTRY, payload: data.data });
+    dispatch({
+      type: GET_COUNTRIES,
+      payload: { data: data.data, order: order, filter: filter },
+    });
   };
 };
 
@@ -25,7 +21,17 @@ const searchCountries = (search, order, filter) => {
     const data = await axios.get(
       `http://localhost:3001/countries?name=${search}`
     );
-    dispatch({ type: SEARCH_COUNTRIES, payload: data.data });
+    dispatch({
+      type: SEARCH_COUNTRIES,
+      payload: { data: data.data, order: order, filter: filter },
+    });
+  };
+};
+
+const getCountry = (id) => {
+  return async function (dispatch) {
+    const data = await axios.get(`http://localhost:3001/countries/${id}`);
+    dispatch({ type: GET_COUNTRY, payload: data.data });
   };
 };
 
