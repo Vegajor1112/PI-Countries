@@ -30,13 +30,3 @@ const filterAndOrder = (countries, order, filter) => {
 };
 
 module.exports = filterAndOrder;
-
-/*users.sort(function (a, b) {
-  if (a.firstname < b.firstname) {
-    return -1;
-  }
-  if (a.firstname > b.firstname) {
-    return 1;
-  }
-  return 0;
-});*/

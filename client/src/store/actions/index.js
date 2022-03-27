@@ -35,8 +35,8 @@ const searchCountries = (search, order, filter) => {
 
 const getActivities = () => {
   return async function (dispatch) {
-    const data = await axios.get("http://localhost:3001/activities");
-    dispatch({ type: GET_ACTIVITIES, payload: data });
+    const data = await axios.get("http://localhost:3001/activity");
+    dispatch({ type: GET_ACTIVITIES, payload: data.data });
   };
 };
 
@@ -69,6 +69,7 @@ export {
   GET_ACTIVITIES,
   getCountries,
   getCountry,
+  getActivities,
   searchCountries,
   setOrder,
   setSearchInput,

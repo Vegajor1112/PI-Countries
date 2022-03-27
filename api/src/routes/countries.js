@@ -15,20 +15,42 @@ countriesRouter.get("", async (req, res) => {
   const { name } = req.query;
 
   if (name) {
-    countriesData = await Country.findAll({
-      where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
-    });
+    if (filter.activity) {
+      countriesData = await Country.findAll({
+        include: [
+          {
+            model: Activity,
+            where: { nombre: { [Op.or]: [filter.activity] } },
+          },
+        ],
+        where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
+      });
+    } else {
+      countriesData = await Country.findAll({
+        include: [{ model: Activity }],
+        where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
+      });
+    }
 
     if (countriesData.length !== 0)
       res.send(filterAndOrder(countriesData, order, filter));
-    else res.send({ notFound: "Country not found" });
+    else res.send([{ notFound: "Country not found" }]);
     return;
   }
 
-  try {
-    countriesData = await Country.findAll({ raw: true });
-  } catch (error) {
-    console.log(error);
+  if (filter.activity) {
+    countriesData = await Country.findAll({
+      include: [
+        {
+          model: Activity,
+          where: { nombre: { [Op.or]: [filter.activity] } },
+        },
+      ],
+    });
+  } else {
+    countriesData = await Country.findAll({
+      include: [{ model: Activity }],
+    });
   }
 
   if (countriesData.length === 0) {

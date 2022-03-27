@@ -1,21 +1,38 @@
 import style from './CountriesContainer.module.css'
-import {useDispatch,useSelector} from 'react-redux'
-import { useEffect} from 'react';
-import { getCountries } from '../../store/actions';
+import {useSelector} from 'react-redux'
+import { useEffect, useState} from 'react';
 import CountryItem from '../CountryItem';
 import FilterBar from '../FilterBar';
+import Pagination from '../Pagination';
 
 const CountriesContainer=(props)=>{
 
-    const dispatch=useDispatch();
-    const countries=useSelector((state)=>state.countries)     
+    const countries=useSelector((state)=>state.countries)
+    const data=countries;
+    const dataLimit=10;
+    const pages = Math.round(data.length/dataLimit);
+    const [currentPage,setCurrentPage]=useState(1);
 
-    return(
+    const goToNextPage=()=>{if(currentPage<pages)setCurrentPage(currentPage+1)};
+    const goToPreviousPage=()=>{if(currentPage>1)setCurrentPage(currentPage-1)};
+    
+    const getPaginatedData = () => {
+        const startIndex = currentPage * dataLimit - dataLimit;
+        const endIndex = startIndex + dataLimit;
+        return data.slice(startIndex, endIndex);
+    };
+    useEffect(()=>{setCurrentPage(1)},[data])
+
+
+
+    return(<>
+        <FilterBar></FilterBar>
+        <Pagination currentPage={currentPage} goToNextPage={goToNextPage} goToPreviousPage={goToPreviousPage}></Pagination>
         <div className={style.mainContainer}>
-            <FilterBar></FilterBar>
-           {countries.length!==0?                
-                !countries.hasOwnProperty("notFound")?
-                    countries.map(country=>{
+            
+           {getPaginatedData().length>0?                
+                !getPaginatedData()[0].hasOwnProperty("notFound")?
+                    getPaginatedData().map(country=>{
                             const {id,nombre,bandera,continente}=country
                             return(                   
                                 <CountryItem 
@@ -29,7 +46,7 @@ const CountriesContainer=(props)=>{
                         }):<h2>No countries found...</h2>:
            "Loading..."}
         </div>
-    )
+        </>)
 }
 
 export default CountriesContainer;

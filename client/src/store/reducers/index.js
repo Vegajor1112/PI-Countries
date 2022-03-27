@@ -1,6 +1,7 @@
 import { orderByPopulation } from "../../utils";
 
 import {
+  GET_ACTIVITIES,
   GET_COUNTRIES,
   GET_COUNTRY,
   SEARCH_COUNTRIES,
@@ -12,6 +13,7 @@ import {
 const initialState = {
   countries: [],
   country: {},
+  activities: [],
   order: {
     orderBy: "name",
     orderType: "ascend",
@@ -42,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);
       }
-      if (filterContinent && data.length > 0) {
+      if (filterContinent && !data[0].hasOwnProperty("notFound")) {
         data = data.filter((country) => country.continente === filterContinent);
       }
       if (data.length === 0) data = { notFound: "Country not found" };
@@ -67,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
         data = orderByPopulation(data, orderType);
       }
 
-      if (filterContinent && data.length > 0) {
+      if (filterContinent && !data[0].hasOwnProperty("notFound")) {
         data = data.filter((country) => country.continente === filterContinent);
       }
       if (data.length === 0) data = { notFound: "Country not found" };
@@ -90,6 +92,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filter: action.payload,
+      };
+    case GET_ACTIVITIES:
+      return {
+        ...state,
+        activities: action.payload,
       };
 
     default:
