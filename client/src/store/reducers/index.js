@@ -1,12 +1,13 @@
+import { orderByPopulation } from "../../utils";
+
 import {
   GET_COUNTRIES,
   GET_COUNTRY,
   SEARCH_COUNTRIES,
+  SET_FILTER,
   SET_ORDER,
   SET_SEARCH_INPUT,
 } from "../actions";
-
-import { orderByPopulation } from "../../utils";
 
 const initialState = {
   countries: [],
@@ -16,8 +17,8 @@ const initialState = {
     orderType: "ascend",
   },
   filter: {
-    filterByContinent: "",
-    filterByActivity: "",
+    continent: "",
+    activity: "",
   },
   searchInput: "",
 };
@@ -26,6 +27,8 @@ const rootReducer = (state = initialState, action) => {
   let data;
   let orderBy;
   let orderType;
+  let filterContinent;
+  let filterActivity;
 
   switch (action.type) {
     //************************************ */   GET_COUNTRIES
@@ -33,9 +36,16 @@ const rootReducer = (state = initialState, action) => {
       data = action.payload.data;
       orderBy = action.payload.order.orderBy;
       orderType = action.payload.order.orderType;
+      filterContinent = action.payload.filter.continent;
+      filterActivity = action.payload.filter.activity;
+
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);
       }
+      if (filterContinent && data.length > 0) {
+        data = data.filter((country) => country.continente === filterContinent);
+      }
+      if (data.length === 0) data = { notFound: "Country not found" };
       return {
         ...state,
         countries: data,
@@ -51,9 +61,17 @@ const rootReducer = (state = initialState, action) => {
       data = action.payload.data;
       orderBy = action.payload.order.orderBy;
       orderType = action.payload.order.orderType;
+      filterContinent = action.payload.filter.continent;
+      filterActivity = action.payload.filter.activity;
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);
       }
+
+      if (filterContinent && data.length > 0) {
+        data = data.filter((country) => country.continente === filterContinent);
+      }
+      if (data.length === 0) data = { notFound: "Country not found" };
+
       return {
         ...state,
         countries: data,
@@ -67,6 +85,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         searchInput: action.payload,
+      };
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
       };
 
     default:

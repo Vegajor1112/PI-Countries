@@ -1,4 +1,15 @@
 .mainContainer {
   background-color: #ff9a3c;
   height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+  width: fit-content;
 }

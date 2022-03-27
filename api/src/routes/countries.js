@@ -3,13 +3,13 @@ const axios = require("axios");
 const { Router } = require("express");
 const { Country, Activity } = require("../db");
 const { Op } = require("sequelize");
-const orderByName = require("../utils/orderByName");
+const filterAndOrder = require("../utils/filterAndOrder");
 
 const countriesRouter = Router();
 
 countriesRouter.get("", async (req, res) => {
   const order = JSON.parse(req.query.order);
-  console.log(order);
+  const filter = JSON.parse(req.query.filter);
 
   let countriesData;
   const { name } = req.query;
@@ -19,7 +19,8 @@ countriesRouter.get("", async (req, res) => {
       where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
     });
 
-    if (countriesData.length !== 0) res.send(orderByName(countriesData, order));
+    if (countriesData.length !== 0)
+      res.send(filterAndOrder(countriesData, order, filter));
     else res.send({ notFound: "Country not found" });
     return;
   }
@@ -53,7 +54,7 @@ countriesRouter.get("", async (req, res) => {
     await Country.bulkCreate(countriesData);
   }
 
-  res.send(orderByName(countriesData, order));
+  res.send(filterAndOrder(countriesData, order, filter));
 });
 
 countriesRouter.get("/:countryId", async (req, res) => {

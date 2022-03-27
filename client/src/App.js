@@ -1,5 +1,4 @@
 import { Route } from "react-router";
-import "./App.css";
 import { Home, Country } from "./pages";
 
 function App() {

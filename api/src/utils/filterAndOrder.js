@@ -1,8 +1,9 @@
-const orderByName = (countries, order) => {
+const filterAndOrder = (countries, order, filter) => {
   const { orderBy, orderType } = order;
 
   if (orderBy !== "name") return countries;
   if (countries.length === 1) return countries;
+  console.log(filter);
 
   let sorted = countries.sort((country1, country2) => {
     if (country1.nombre < country2.nombre) {
@@ -28,7 +29,7 @@ const orderByName = (countries, order) => {
   return sorted;
 };
 
-module.exports = orderByName;
+module.exports = filterAndOrder;
 
 /*users.sort(function (a, b) {
   if (a.firstname < b.firstname) {
