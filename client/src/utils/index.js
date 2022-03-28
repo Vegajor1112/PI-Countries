@@ -1,3 +1,4 @@
 import orderByPopulation from "./orderByPopulation";
+import validate from "./validate";
 
-export { orderByPopulation };
+export { orderByPopulation, validate };

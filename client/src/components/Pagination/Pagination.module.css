@@ -1,0 +1,23 @@
+.mainContainer {
+  width: fit-content;
+  align-self: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+.pagBtn {
+  background-color: #155263;
+  border: none;
+  margin: 3px;
+  margin-top: 1em;
+  color: white;
+  transition: 0.3s;
+  height: 3em;
+  width: 5em;
+  border-radius: 5px;
+}
+
+.pagBtn:hover {
+  background-color: #ff9a3c;
+  color: black;
+}

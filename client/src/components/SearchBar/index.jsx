@@ -26,8 +26,7 @@ const SearchBar=()=>{
 
     return(
         <div className={style.mainContainer}>
-            <input type="text" className={style.searchInput} value={searchInput} onChange={handleChange} />
-            <button className={style.searchButton} >Search</button>
+            <input type="text" className={style.searchInput} value={searchInput} onChange={handleChange} />            
         </div>
     )
 }

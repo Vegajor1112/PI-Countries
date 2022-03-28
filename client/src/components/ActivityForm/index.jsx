@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
 import style from './ActivityForm.module.css';
+import { validate } from '../../utils';
 
 const ActivityForm = (props)=>{
 
@@ -36,9 +36,15 @@ const ActivityForm = (props)=>{
     }
 
     const handleSubmit=async (e)=>{
-        console.log(form)
         e.preventDefault();
-        return await axios.post('http://localhost:3001/activity',form)
+        const {valid,message}=validate(form);
+        if(valid){
+            await axios.post('http://localhost:3001/activity',form);
+            alert(message, "Activity created")
+        }else{
+            alert(message)
+        }
+        
     }
 
     const removeCountry=(e)=>{
@@ -47,18 +53,22 @@ const ActivityForm = (props)=>{
     
     return(
     <form className={style.form} onSubmit={handleSubmit}>
+
         <div className={style.formItem}>
             <label htmlFor="nombre">Name:</label>
             <input type="text" name="nombre" id="nombre" onChange={handleInputChange} value={form.nombre} />
         </div>
+
         <div className={style.formItem}>
             <label htmlFor="dificultad">Difficulty:</label>
             <input type="number" name="dificultad" id="dificultad" min="1" max="5" onChange={handleInputChange} value={form.dificultad}/>
         </div>
+
         <div className={style.formItem}>
             <label htmlFor="duracion">Duration:</label>
             <input type="number" name="duracion" id="duracion" min="1" max="8" onChange={handleInputChange} value={form.duracion}/>
-        </div>     
+        </div>   
+
         <div className={style.formItem}>
             <label htmlFor="temporada">Season:</label>
             <select name="temporada" id="temporada" onChange={handleInputChange} value={form.temporada}>
@@ -68,13 +78,16 @@ const ActivityForm = (props)=>{
                 <option>Autumn</option>
             </select>
         </div>       
+
         <div className={style.formItem}>
             <label htmlFor="idPaises">Countries:</label>
             <select name="idPaises" id="idPaises" onChange={handleInputChange}>
+                <option value="" disabled></option>
                 {countries.length!==0?
                 countries.map(country=><option key={country.id} id={country.id} value={country.id}>{country.nombre}</option>):"Loading"}
             </select>
         </div>
+
         <div>
             {form.idCountries.length!==0?
             form.idCountries.map(id=><div key={id}><span>-{id}-</span><button onClick={removeCountry} value={id}>X</button></div>):

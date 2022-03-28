@@ -1,10 +1,12 @@
-import { useState } from "react";
+
 import { NavBar , CountriesContainer } from "../components";
+
 
 const Home=()=>{
 
     return(
         <>
+            
             <NavBar />
             <CountriesContainer />
             

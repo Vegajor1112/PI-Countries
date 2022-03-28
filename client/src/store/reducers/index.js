@@ -47,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
       if (filterContinent && !data[0].hasOwnProperty("notFound")) {
         data = data.filter((country) => country.continente === filterContinent);
       }
-      if (data.length === 0) data = { notFound: "Country not found" };
+      if (data.length === 0) data = [{ notFound: "Country not found" }];
       return {
         ...state,
         countries: data,
@@ -64,7 +64,6 @@ const rootReducer = (state = initialState, action) => {
       orderBy = action.payload.order.orderBy;
       orderType = action.payload.order.orderType;
       filterContinent = action.payload.filter.continent;
-      filterActivity = action.payload.filter.activity;
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);
       }
@@ -72,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
       if (filterContinent && !data[0].hasOwnProperty("notFound")) {
         data = data.filter((country) => country.continente === filterContinent);
       }
-      if (data.length === 0) data = { notFound: "Country not found" };
+      if (data.length === 0) data = [{ notFound: "Country not found" }];
 
       return {
         ...state,

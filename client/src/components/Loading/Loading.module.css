@@ -1,0 +1,12 @@
+.mainContainer {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+  margin-left: 45vw;
+}
+
+.loadingGif {
+  width: 5em;
+}

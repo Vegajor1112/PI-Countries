@@ -3,7 +3,6 @@ const filterAndOrder = (countries, order, filter) => {
 
   if (orderBy !== "name") return countries;
   if (countries.length === 1) return countries;
-  console.log(filter);
 
   let sorted = countries.sort((country1, country2) => {
     if (country1.nombre < country2.nombre) {

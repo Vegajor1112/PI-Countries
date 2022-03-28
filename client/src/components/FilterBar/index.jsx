@@ -4,14 +4,14 @@ import { useFilter, useOrder } from '../../hooks'
 import {CONTINENTS} from '../../consts'
 import { useEffect } from 'react'
 import { getActivities } from '../../store/actions'
+import NavigationButton from '../NavigationButton'
 
 const FilterBar=(props)=>{  
     const dispatch=useDispatch();    
     const activities=useSelector(state=>state.activities);
     const [order,setOrder]=useOrder();
     const [filter,setFilter]=useFilter();
-    console.log("En el componente - ",activities)
-    
+        
     const handleOrderChange=(e)=>{
         const property=e.target.name;
         const value=e.target.value;
@@ -65,6 +65,7 @@ const FilterBar=(props)=>{
                     </select>
                 </div>
             </div>
+            
         </div>
     )   
 }

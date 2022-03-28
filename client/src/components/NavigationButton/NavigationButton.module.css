@@ -1,0 +1,16 @@
+.navBtn {
+  border: none;
+  background-color: brown;
+  color: aliceblue;
+  border-radius: 5px;
+  height: 2em;
+  transition: 0.2s;
+}
+.navBtn:hover {
+  box-shadow: 2px 2px 2px black;
+  transition: 0.1s;
+}
+
+.navBtn:active {
+  box-shadow: 0px 0px 0px beige;
+}
