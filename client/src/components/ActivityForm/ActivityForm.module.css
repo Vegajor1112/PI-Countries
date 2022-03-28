@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formItem {
+  width: fit-content;
+}
+
+input,
+select,
+option {
+  width: fit-content;
+}

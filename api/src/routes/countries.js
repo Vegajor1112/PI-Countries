@@ -79,6 +79,19 @@ countriesRouter.get("", async (req, res) => {
   res.send(filterAndOrder(countriesData, order, filter));
 });
 
+countriesRouter.get("/formData", async (req, res) => {
+  let countriesData;
+  try {
+    countriesData = await Country.findAll({
+      raw: true,
+      attributes: ["id", "nombre"],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  res.status(200).send(countriesData);
+});
+
 countriesRouter.get("/:countryId", async (req, res) => {
   let countriesData = await Country.findAll({
     where: { id: req.params.countryId.toUpperCase() },

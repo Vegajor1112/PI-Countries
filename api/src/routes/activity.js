@@ -5,17 +5,20 @@ const activityRouter = Router();
 
 activityRouter.post("", async (req, res) => {
   const { id, nombre, dificultad, duracion, temporada, idCountries } = req.body;
+  try {
+    const activity = await Activity.create({
+      id,
+      nombre,
+      dificultad,
+      duracion,
+      temporada,
+    });
 
-  const activity = await Activity.create({
-    id,
-    nombre,
-    dificultad,
-    duracion,
-    temporada,
-  });
-
-  activity.addCountries(idCountries);
-  res.send(activity);
+    activity.addCountries(idCountries);
+    res.send(activity);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 activityRouter.get("", async (req, res) => {

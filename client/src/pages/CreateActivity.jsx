@@ -1,5 +1,9 @@
+import { ActivityForm } from "../components";
+
 const CreateActivity=()=>{
-    return <></>
+    return (<>
+    <ActivityForm></ActivityForm>
+    </>)
 }
 
 export default CreateActivity;
