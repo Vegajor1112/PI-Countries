@@ -1,0 +1,50 @@
+.mainContainer {
+  width: 60vw;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px black;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: #155263;
+  color: aliceblue;
+  text-shadow: 2px 2px 2px black;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding-bottom: 1em;
+  text-shadow: 1px 1px 1px grey;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(244, 244, 245);
+}
+
+.label {
+  font-weight: 700;
+  text-decoration: underline;
+  font-size: 1.1em;
+  align-self: flex-start;
+  margin-left: 2em;
+}
+
+.flagImg {
+  width: 15em;
+}
