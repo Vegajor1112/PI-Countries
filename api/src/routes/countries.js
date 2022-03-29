@@ -83,6 +83,7 @@ countriesRouter.get("/formData", async (req, res) => {
   let countriesData;
   try {
     countriesData = await Country.findAll({
+      order: [["nombre", "ASC"]],
       raw: true,
       attributes: ["id", "nombre"],
     });
