@@ -52,49 +52,51 @@ const ActivityForm = (props)=>{
     }   
     
     return(
-    <form className={style.form} onSubmit={handleSubmit}>
+        <div className={style.mainContainer}>
 
-        <div className={style.formItem}>
-            <label htmlFor="nombre">Name:</label>
-            <input type="text" name="nombre" id="nombre" onChange={handleInputChange} value={form.nombre} />
+        <div className={style.header}>
+            <p>Create New Activity</p>
         </div>
 
-        <div className={style.formItem}>
-            <label htmlFor="dificultad">Difficulty:</label>
-            <input type="number" name="dificultad" id="dificultad" min="1" max="5" onChange={handleInputChange} value={form.dificultad}/>
-        </div>
 
-        <div className={style.formItem}>
-            <label htmlFor="duracion">Duration:</label>
-            <input type="number" name="duracion" id="duracion" min="1" max="8" onChange={handleInputChange} value={form.duracion}/>
-        </div>   
+    <form className={style.form} onSubmit={handleSubmit} autoComplete="off">
 
-        <div className={style.formItem}>
-            <label htmlFor="temporada">Season:</label>
-            <select name="temporada" id="temporada" onChange={handleInputChange} value={form.temporada}>
+        <div className={style.inputs}>
+            <label htmlFor="nombre" className={style.label}>Name:</label>
+            <input type="text" name="nombre" id="nombre" onChange={handleInputChange} value={form.nombre} className={style.input} />
+        
+            <label htmlFor="dificultad" className={style.label}>Difficulty:</label>
+            <input type="number" name="dificultad" id="dificultad" min="1" max="5" onChange={handleInputChange} value={form.dificultad} className={style.input}/>
+        
+            <label htmlFor="duracion" className={style.label}>Duration:</label>
+            <input type="number" name="duracion" id="duracion" min="1" max="8" onChange={handleInputChange} value={form.duracion} className={style.input}/>
+        
+            <label htmlFor="temporada" className={style.label}>Season:</label>
+            <select name="temporada" id="temporada" onChange={handleInputChange} value={form.temporada} className={style.input}>
                 <option>Winter</option>
                 <option>Spring</option>
                 <option>Summer</option>
                 <option>Autumn</option>
             </select>
-        </div>       
-
-        <div className={style.formItem}>
-            <label htmlFor="idPaises">Countries:</label>
-            <select name="idPaises" id="idPaises" onChange={handleInputChange}>
+        
+            <label htmlFor="idPaises" className={style.label}>Countries:</label>
+            <select name="idPaises" id="idPaises" onChange={handleInputChange} className={style.input}>
                 <option value="" disabled></option>
                 {countries.length!==0?
-                countries.map(country=><option key={country.id} id={country.id} value={country.id}>{country.nombre}</option>):"Loading"}
+                countries.map(country=><option key={country.id} value={country.id}>{country.nombre}</option>):"Loading"}
             </select>
         </div>
-
-        <div>
-            {form.idCountries.length!==0?
-            form.idCountries.map(id=><div key={id}><span>-{id}-</span><button onClick={removeCountry} value={id}>X</button></div>):
-            <span>No countries selected</span>}
+        <div className={style.footer}>
+            <div className={style.selectedCountries} >
+                {form.idCountries.length!==0?
+                form.idCountries.map(id=><div key={id}><span>-{id}-</span><button onClick={removeCountry} value={id}>X</button></div>):
+                <span>No countries selected</span>}
+            </div>
+            <input type="submit" value="Submit" className={style.submitBtn} />
         </div>
-        <input type="submit" value="Submit" />
+        
     </form>
+    </div>
     )
 }
 

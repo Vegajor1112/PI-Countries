@@ -9,7 +9,7 @@ const NavBar = ()=>{
         <div className={style.mainContainer}>
             <div className={style.logoContainer}>
                 <img src={logo} alt="logo" className={style.logo} />
-                <span className={style.logoLabel}>Logo Label</span>
+                <span className={style.logoLabel}>My Countries</span>
                 
             </div>
             

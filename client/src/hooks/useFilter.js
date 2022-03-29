@@ -7,7 +7,6 @@ const useFilter = () => {
 
   const setNewFilter = (property, value) => {
     const newFilter = { ...filter, [property]: value };
-    console.log("Despachando cambios");
     dispatch(setFilter(newFilter));
   };
   return [filter, setNewFilter];
