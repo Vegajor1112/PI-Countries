@@ -1,1 +1,7 @@
-export const CONTINENTS = ["Americas", "Oceania", "Europe", "Asia", "Africa"];
+import actions from "./actions";
+
+import initialState from "./initialState";
+
+import CONTINENTS from "./continents";
+
+export { actions, initialState, CONTINENTS };

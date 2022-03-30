@@ -1,4 +1,5 @@
 import { orderByPopulation } from "../../utils";
+import { initialState } from "../../consts";
 
 import {
   GET_ACTIVITIES,
@@ -9,21 +10,6 @@ import {
   SET_ORDER,
   SET_SEARCH_INPUT,
 } from "../actions";
-
-const initialState = {
-  countries: [],
-  country: {},
-  activities: [],
-  order: {
-    orderBy: "name",
-    orderType: "ascend",
-  },
-  filter: {
-    continent: "",
-    activity: "",
-  },
-  searchInput: "",
-};
 
 const rootReducer = (state = initialState, action) => {
   let data;

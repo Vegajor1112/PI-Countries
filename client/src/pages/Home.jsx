@@ -7,7 +7,7 @@ const Home=()=>{
     return(
         <>
             
-            <NavBar />
+            <NavBar disabled=""/>
             <CountriesContainer />
             
         </>

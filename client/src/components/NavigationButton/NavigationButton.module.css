@@ -1,7 +1,8 @@
 .navBtn {
   border: none;
-  background-color: brown;
-  color: aliceblue;
+  background-color: #ff9a3c;
+  text-shadow: 1px 1px 1px grey;
+  color: black;
   border-radius: 5px;
   height: 2em;
   transition: 0.2s;

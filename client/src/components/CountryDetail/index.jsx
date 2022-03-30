@@ -2,6 +2,7 @@ import style from './CountryDetail.module.css';
 import { useDispatch , useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getCountry } from '../../store/actions';
+import NavBar from '../NavBar';
 
 
 const CountryDetail=(props)=>{
@@ -13,6 +14,9 @@ const CountryDetail=(props)=>{
     useEffect(()=>{dispatch(getCountry(id))},[dispatch,id])
 
     return(
+        <>
+            <NavBar disabled="disabled" />
+
         <div className={style.mainContainer}>
             <div className={style.header}>
                 <img src={bandera} alt="flag" className={style.flagImg} />
@@ -46,7 +50,7 @@ const CountryDetail=(props)=>{
                 </div>               
                                
             </div>
-        </div>)
+        </div></> )
 }
 
 export default CountryDetail;

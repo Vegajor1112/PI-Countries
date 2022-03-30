@@ -1,12 +1,15 @@
 import axios from "axios";
+import { actions } from "../../consts";
 
-const GET_COUNTRIES = "GET_COUNTRIES";
-const GET_COUNTRY = "GET_COUNTRY";
-const GET_ACTIVITIES = "GET_ACTIVITIES";
-const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
-const SET_ORDER = "SET_ORDER";
-const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
-const SET_FILTER = "SET_FILTER";
+const {
+  GET_COUNTRIES,
+  GET_COUNTRY,
+  GET_ACTIVITIES,
+  SEARCH_COUNTRIES,
+  SET_ORDER,
+  SET_SEARCH_INPUT,
+  SET_FILTER,
+} = actions;
 
 const getCountries = (order, filter) => {
   return async function (dispatch) {

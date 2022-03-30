@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { getCountries,searchCountries} from '../../store/actions';
 import { useFilter, useOrder, useSearchInput } from '../../hooks';
 
-const SearchBar=()=>{    
+const SearchBar=(props)=>{
+    const {disabled}=props;    
 
     const dispatch=useDispatch()
 
@@ -26,7 +27,7 @@ const SearchBar=()=>{
 
     return(
         <div className={style.mainContainer}>
-            <input type="text" className={style.searchInput} value={searchInput} onChange={handleChange} />            
+            <input type="text" disabled={disabled} className={style.searchInput} value={searchInput} onChange={handleChange} />            
         </div>
     )
 }

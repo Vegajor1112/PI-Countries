@@ -1,24 +1,32 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
-const session = require('supertest-session');
-const app = require('../../src/app.js');
-const { Country, conn } = require('../../src/db.js');
+const { expect } = require("chai");
+const session = require("supertest-session");
+const app = require("../../src/app.js");
+const { Activity, conn } = require("../../src/db.js");
 
 const agent = session(app);
-const country = {
-  name: 'Argentina',
+const activity = {
+  nombre: "Tomar Mate",
+  duracion: 1,
+  dificultad: 4,
+  temporada: "Summer",
 };
 
-describe('Country routes', () => {
-  before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
-  beforeEach(() => Country.sync({ force: true })
-    .then(() => Country.create(pokemon)));
-  describe('GET /countries', () => {
-    it('should get 200', () =>
-      agent.get('/countries').expect(200)
-    );
+describe("Activity routes", () => {
+  before(() =>
+    conn.authenticate().catch((err) => {
+      console.error("Error:", err);
+    })
+  );
+  beforeEach(() =>
+    Activity.sync({ force: true }).then(() => Activity.create(activity))
+  );
+  describe("GET /activity", () => {
+    it("La ruta GET /activity funciona correctamente y responde con status 200", () =>
+      agent.get("/activity").expect(200));
+  });
+  describe("POST /activity", () => {
+    it("La ruta POST /activity funciona correctamente y responde con status 200", () =>
+      agent.post("/activity", activity).expect(200));
   });
 });

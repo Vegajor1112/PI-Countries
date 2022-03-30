@@ -3,7 +3,8 @@ import style from './NavBar.module.css'
 import SearchBar from '../SearchBar'
 import NavigationButton from '../NavigationButton'
 
-const NavBar = ()=>{
+const NavBar = (props)=>{
+    const {disabled}=props
     return(
         <>
         <div className={style.mainContainer}>
@@ -13,7 +14,7 @@ const NavBar = ()=>{
                 
             </div>
             
-            <SearchBar />       
+            <SearchBar disabled={disabled} />       
             <NavigationButton goTo="/createActivity" label="Create New Activity" />    
         </div>
         

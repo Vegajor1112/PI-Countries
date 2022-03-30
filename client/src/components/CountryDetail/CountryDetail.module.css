@@ -4,7 +4,7 @@
   box-shadow: 2px 2px 2px black;
   overflow: hidden;
   margin: auto;
-  margin-top: 5em;
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
 }
@@ -26,6 +26,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   padding-bottom: 1em;
+  background-color: rgb(244, 244, 245);
   text-shadow: 1px 1px 1px grey;
 }
 
@@ -46,4 +47,11 @@
 
 .flagImg {
   width: 15em;
+}
+
+.background {
+  background-color: #ff9a3c;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
 }

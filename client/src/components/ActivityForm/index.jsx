@@ -2,6 +2,7 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import style from './ActivityForm.module.css';
 import { validate } from '../../utils';
+import NavBar from '../NavBar';
 
 const ActivityForm = (props)=>{
 
@@ -52,8 +53,10 @@ const ActivityForm = (props)=>{
     }   
     
     return(
+        <>
+        <NavBar disabled="disabled" />  
         <div className={style.mainContainer}>
-
+            
         <div className={style.header}>
             <p>Create New Activity</p>
         </div>
@@ -97,7 +100,7 @@ const ActivityForm = (props)=>{
         
     </form>
     </div>
-    )
+    </>)
 }
 
 export default ActivityForm;

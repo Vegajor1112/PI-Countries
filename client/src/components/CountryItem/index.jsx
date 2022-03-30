@@ -12,8 +12,10 @@ const CountryItem=(props)=>{
     return(
     <div className={style.mainContainer}>
         <img src={bandera} alt="flag" className={style.countryImage} />
-        <span>{nombre}</span>
-        <span>{continente}</span>
+        <div className={style.data}>
+        <span className={style.countryName}>{nombre}</span>
+        <span className={style.continent}>{continente}</span>
+        </div>
         <button className={style.detailsButton}onClick={handleClick} >View details...</button>
     </div>)
 }
