@@ -1,19 +1,12 @@
-
 import { NavBar , CountriesContainer } from "../components";
 
-
 const Home=()=>{
-
     return(
-        <>
-            
+        <>            
             <NavBar disabled=""/>
-            <CountriesContainer />
-            
-        </>
-        
-    )
-    
+            <CountriesContainer />            
+        </>        
+    )    
 }
 
 export default Home;

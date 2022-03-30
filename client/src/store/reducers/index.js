@@ -16,7 +16,7 @@ const rootReducer = (state = initialState, action) => {
   let orderBy;
   let orderType;
   let filterContinent;
-  let filterActivity;
+  //let filterActivity;
 
   switch (action.type) {
     //************************************ */   GET_COUNTRIES
@@ -25,7 +25,7 @@ const rootReducer = (state = initialState, action) => {
       orderBy = action.payload.order.orderBy;
       orderType = action.payload.order.orderType;
       filterContinent = action.payload.filter.continent;
-      filterActivity = action.payload.filter.activity;
+      //filterActivity = action.payload.filter.activity;
 
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);

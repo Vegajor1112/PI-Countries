@@ -1,10 +1,14 @@
-import { CountryDetail } from "../components"
+import { CountryDetail , NavBar } from "../components"
 
 const Country = (props)=>{
     const id=props.match.params.id;
-    return<>        
-        <CountryDetail id={id}></CountryDetail>
-    </>
+
+    return(
+            <>        
+                <NavBar disabled="disabled" />
+                <CountryDetail id={id} />
+            </>
+    )
 }
 
 export default Country;

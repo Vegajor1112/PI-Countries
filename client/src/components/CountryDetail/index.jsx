@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { getCountry } from '../../store/actions';
 import NavBar from '../NavBar';
 
-
 const CountryDetail=(props)=>{
     const id=props.id;
     const dispatch = useDispatch();
@@ -15,7 +14,7 @@ const CountryDetail=(props)=>{
 
     return(
         <>
-            <NavBar disabled="disabled" />
+            
 
         <div className={style.mainContainer}>
             <div className={style.header}>

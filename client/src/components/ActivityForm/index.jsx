@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import style from './ActivityForm.module.css';
 import { validate } from '../../utils';
 import NavBar from '../NavBar';
+import Min from '../Min';
 
 const ActivityForm = (props)=>{
 
@@ -41,7 +42,7 @@ const ActivityForm = (props)=>{
         const {valid,message}=validate(form);
         if(valid){
             await axios.post('http://localhost:3001/activity',form);
-            alert(message, "Activity created")
+            alert(`${message} - Activity created`)
         }else{
             alert(message)
         }
@@ -54,7 +55,7 @@ const ActivityForm = (props)=>{
     
     return(
         <>
-        <NavBar disabled="disabled" />  
+          
         <div className={style.mainContainer}>
             
         <div className={style.header}>
@@ -92,7 +93,7 @@ const ActivityForm = (props)=>{
         <div className={style.footer}>
             <div className={style.selectedCountries} >
                 {form.idCountries.length!==0?
-                form.idCountries.map(id=><div key={id}><span>-{id}-</span><button onClick={removeCountry} value={id}>X</button></div>):
+                form.idCountries.map(id=><Min key={id} countryId={id} onClickFunction={removeCountry} />):
                 <span>No countries selected</span>}
             </div>
             <input type="submit" value="Submit" className={style.submitBtn} />

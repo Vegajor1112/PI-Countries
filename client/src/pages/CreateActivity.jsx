@@ -1,8 +1,10 @@
-import { ActivityForm } from "../components";
+import { ActivityForm , NavBar } from "../components";
 
 const CreateActivity=()=>{
-    return (<>
-    <ActivityForm></ActivityForm>
+    return (
+    <>
+        <NavBar disabled="disabled" />
+        <ActivityForm />
     </>)
 }
 

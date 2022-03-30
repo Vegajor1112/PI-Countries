@@ -21,3 +21,9 @@
   background-color: #ff9a3c;
   color: black;
 }
+
+.number {
+  font-weight: 500;
+  font-size: 1.5em;
+  margin: 1em;
+}

@@ -13,7 +13,7 @@ const Pagination=(props)=>{
         <button onClick={goToFirstPage} className={style.pagBtn}>First</button>
         <button onClick={()=>goToPreviousPage()} className={style.pagBtn}>Previous</button>
 
-        <span>{currentPage}</span>
+        <span className={style.number}>{currentPage}</span>
         
         <button onClick={()=>goToNextPage()} className={style.pagBtn}>Next</button>
         <button onClick={goToLastPage} className={style.pagBtn}>Last</button>
