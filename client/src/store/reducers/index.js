@@ -16,16 +16,13 @@ const rootReducer = (state = initialState, action) => {
   let orderBy;
   let orderType;
   let filterContinent;
-  //let filterActivity;
 
   switch (action.type) {
-    //************************************ */   GET_COUNTRIES
     case GET_COUNTRIES:
       data = action.payload.data;
       orderBy = action.payload.order.orderBy;
       orderType = action.payload.order.orderType;
       filterContinent = action.payload.filter.continent;
-      //filterActivity = action.payload.filter.activity;
 
       if (orderBy === "population") {
         data = orderByPopulation(data, orderType);
@@ -39,7 +36,6 @@ const rootReducer = (state = initialState, action) => {
         countries: data,
       };
 
-    //*************************************** */
     case GET_COUNTRY:
       return {
         ...state,

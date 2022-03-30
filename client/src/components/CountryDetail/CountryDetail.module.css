@@ -55,3 +55,19 @@
   height: 100vh;
   position: absolute;
 }
+
+.itemActivity {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(244, 244, 245);
+  border-top: 1px solid black;
+}
+.labelActivity {
+  font-weight: 700;
+  text-decoration: underline;
+  justify-self: flex-start;
+  font-size: 1.1em;
+  margin-left: 2em;
+}

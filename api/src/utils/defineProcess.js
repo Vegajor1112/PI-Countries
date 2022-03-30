@@ -1,5 +1,4 @@
 const defineProcess = (req) => {
-  console.log("deberian haber cambiado los parametros");
   let searching = false;
   let filtering = false;
   let ordering = false;
@@ -14,7 +13,6 @@ const defineProcess = (req) => {
 
   if (filter.activity) filtering = { filter: true, value: filter.activity };
 
-  console.log(searching, filtering, ordering);
   return { searching, filtering, ordering };
 };
 

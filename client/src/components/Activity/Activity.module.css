@@ -1,0 +1,12 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 700;
+}
+
+.value {
+  font-style: italic;
+}

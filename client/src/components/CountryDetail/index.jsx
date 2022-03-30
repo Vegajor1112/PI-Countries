@@ -2,7 +2,7 @@ import style from './CountryDetail.module.css';
 import { useDispatch , useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getCountry } from '../../store/actions';
-import NavBar from '../NavBar';
+import Activity from '../Activity';
 
 const CountryDetail=(props)=>{
     const id=props.id;
@@ -14,8 +14,6 @@ const CountryDetail=(props)=>{
 
     return(
         <>
-            
-
         <div className={style.mainContainer}>
             <div className={style.header}>
                 <img src={bandera} alt="flag" className={style.flagImg} />
@@ -43,13 +41,18 @@ const CountryDetail=(props)=>{
                     <p className={style.label}>Population:</p>  
                     <span className={style.info}>{poblacion} habs.</span> 
                 </div>  
-                <div className={style.item}>
-                    <p className={style.label}>Activities:</p>   
-                    {Activities&&Activities.length!==0?Activities.map(activity=><><span>{activity.nombre}</span><br></br></>):<span>No activities</span>}
-                </div>               
+                              
                                
             </div>
-        </div></> )
+            <div className={style.itemActivity}>
+                    <p className={style.labelActivity}>Activities:</p>   
+                    {Activities&&Activities.length!==0?
+                    Activities.map(activity=>
+                        <Activity nombre={activity.nombre} dificultad={activity.dificultad} temporada={activity.temporada} duracion={activity.duracion} />):
+                        <span>No activities</span>}
+                </div> 
+        </div>
+        </>)
 }
 
 export default CountryDetail;

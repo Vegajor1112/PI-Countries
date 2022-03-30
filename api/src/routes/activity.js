@@ -23,10 +23,8 @@ activityRouter.post("", async (req, res) => {
 
 activityRouter.get("", async (req, res) => {
   const activities = await Activity.findAll({ raw: true });
-  const response = activities.map((activity) => {
-    return { nombre: activity.nombre, id: activity.id };
-  });
-  res.status(200).send(response);
+
+  res.status(200).send(activities);
 });
 
 module.exports = activityRouter;
