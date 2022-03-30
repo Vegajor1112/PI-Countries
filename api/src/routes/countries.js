@@ -1,82 +1,28 @@
-const { urlencoded } = require("body-parser");
-const axios = require("axios");
 const { Router } = require("express");
 const { Country, Activity } = require("../db");
-const { Op } = require("sequelize");
-const filterAndOrder = require("../utils/filterAndOrder");
+
+const {
+  defineProcess,
+  checkDatabase,
+  fetchData,
+  buildStatement,
+} = require("../utils");
 
 const countriesRouter = Router();
 
 countriesRouter.get("", async (req, res) => {
-  const order = JSON.parse(req.query.order);
-  const filter = JSON.parse(req.query.filter);
+  const { searching, filtering, ordering } = defineProcess(req);
 
-  let countriesData;
-  const { name } = req.query;
+  !(await checkDatabase()) && (await fetchData());
 
-  if (name) {
-    if (filter.activity) {
-      countriesData = await Country.findAll({
-        include: [
-          {
-            model: Activity,
-            where: { nombre: { [Op.or]: [filter.activity] } },
-          },
-        ],
-        where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
-      });
-    } else {
-      countriesData = await Country.findAll({
-        include: [{ model: Activity }],
-        where: { nombre: { [Op.iLike]: `%${req.query.name}%` } },
-      });
-    }
+  const statement = buildStatement(searching, filtering, ordering);
 
-    if (countriesData.length !== 0)
-      res.send(filterAndOrder(countriesData, order, filter));
-    else res.send([{ notFound: "Country not found" }]);
-    return;
-  }
+  let response = await Country.findAll(statement);
 
-  if (filter.activity) {
-    countriesData = await Country.findAll({
-      include: [
-        {
-          model: Activity,
-          where: { nombre: { [Op.or]: [filter.activity] } },
-        },
-      ],
-    });
-  } else {
-    countriesData = await Country.findAll({
-      include: [{ model: Activity }],
-    });
-  }
+  response = response.length === 0 ? [{ notFound: "Not found" }] : response;
+  const status = response[0].hasOwnProperty("notFound") ? 204 : 200;
 
-  if (countriesData.length === 0) {
-    countriesData = await axios("https://restcountries.com/v3.1/all");
-    countriesData = countriesData.data;
-
-    countriesData = countriesData.map((country) => {
-      let capital;
-      if (!country.capital) capital = "No capital";
-      else capital = country.capital[0];
-
-      return {
-        id: country.cca3,
-        nombre: country.name.common,
-        bandera: country.flags.png,
-        continente: country.region,
-        capital: capital,
-        subregion: country.subregion,
-        area: country.area,
-        poblacion: country.population,
-      };
-    });
-    await Country.bulkCreate(countriesData);
-  }
-
-  res.send(filterAndOrder(countriesData, order, filter));
+  res.status(status).send(response);
 });
 
 countriesRouter.get("/formData", async (req, res) => {

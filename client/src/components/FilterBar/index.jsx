@@ -4,7 +4,6 @@ import { useFilter, useOrder } from '../../hooks'
 import {CONTINENTS} from '../../consts'
 import { useEffect } from 'react'
 import { getActivities } from '../../store/actions'
-import NavigationButton from '../NavigationButton'
 
 const FilterBar=(props)=>{  
     const dispatch=useDispatch();    
@@ -24,7 +23,7 @@ const FilterBar=(props)=>{
         setFilter(property,value)
     }
 
-    useEffect(()=>{dispatch(getActivities())},[])
+    useEffect(()=>{dispatch(getActivities())},[dispatch])
 
     return(
         <div className={style.mainContainer}>
